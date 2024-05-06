@@ -7,12 +7,12 @@
 int main() {
     const int screenWidth = 750;
     const int screenHeight = 750;
-    const int cellSize = 25; // Size of each cell
-    // const int numCells = 5; // Number of cells to add
+    const int cellSize = 25;  
     InitWindow(screenWidth, screenHeight, "Game of Life");
     SetTargetFPS(60); 
     Simulation Simulation(screenHeight, screenWidth, cellSize);
     Simulation.SetCellValue(3, 4, 1);
+
 
 
     
