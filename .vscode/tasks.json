@@ -1,0 +1,28 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build",
+            "type": "shell",
+            "command": "clang",
+            "args": [
+                "-o",
+                "${fileBasenameNoExtension}",
+                "${file}",
+                "-I/usr/local/include",
+                "-L/usr/local/lib",
+                "-lraylib",
+                "-framework", "OpenGL",
+                "-framework", "OpenAL",
+                "-framework", "Cocoa",
+                "-framework", "IOKit",
+                "-framework", "CoreVideo"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": []
+        }
+    ]
+}
