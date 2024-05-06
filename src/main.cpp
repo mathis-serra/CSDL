@@ -33,7 +33,8 @@ int main() {
         ClearBackground(BLACK);
 
         if (!drawGrid) {
-            DrawText("Welcome to Game of Life", (screenWidth - MeasureText("Welcome to Game of Life", 40)) / 2, screenHeight / 2 - 20, 40, WHITE);
+            DrawText("Welcome to Game of Life", (screenWidth - MeasureText("Welcome to Game of Life", 50)) / 2, screenHeight / 2 - 80, 50, WHITE);
+            DrawText("Press ENTER to play", (screenWidth - MeasureText("Press ENTER to play", 35)) / 2, screenHeight / 2 + 50, 35, WHITE);
         }
 
         if (drawGrid) { 
