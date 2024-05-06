@@ -9,7 +9,7 @@ int main() {
     const int screenHeight = 750;
     const int cellSize = 25;  
     InitWindow(screenWidth, screenHeight, "Game of Life");
-    SetTargetFPS(60); 
+    SetTargetFPS(12); 
     Simulation Simulation(screenHeight, screenWidth, cellSize);
     Simulation.SetCellValue(3, 4, 1);
 
@@ -24,6 +24,9 @@ int main() {
             continue; 
         }
 
+
+
+        Simulation.Update();
         BeginDrawing();
 
         ClearBackground(BLACK);
