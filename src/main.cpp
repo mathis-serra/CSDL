@@ -2,7 +2,7 @@
 #include <vector> 
 
 bool drawGrid = false;
-std::vector<Vector2> cellPositions; // Vecteur pour stocker les positions des cellules
+std::vector<Vector2> cellPositions; // Vector to store cell positions
 
 void draw_grid(int screenWidth, int screenHeight, int size, Color color);
 void add_cell(int x, int y, int size, Color color);
@@ -10,14 +10,14 @@ void add_cell(int x, int y, int size, Color color);
 int main() {
     const int screenWidth = 1100;
     const int screenHeight = 700;
-    const int cellSize = 16; // Taille de chaque cellule
-    const int numCells = 5; // Nombre de cellules à ajouter
+    const int cellSize = 16; // Size of each cell
+    const int numCells = 5; // Number of cells to add
     InitWindow(screenWidth, screenHeight, "Game of Life");
 
     SetTargetFPS(60); 
 
     for (int i = 0; i < numCells; ++i) {
-        // Génère des positions aléatoires multiples de la taille de la cellule
+        // Generate random positions multiples of cell size
         int randX = GetRandomValue(0, (screenWidth / cellSize) - 1) * cellSize; 
         int randY = GetRandomValue(0, (screenHeight / cellSize) - 1) * cellSize; 
         cellPositions.push_back({(float)randX, (float)randY});
