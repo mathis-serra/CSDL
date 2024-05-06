@@ -1,6 +1,7 @@
 #include<iostream>
+#include <SFML/Graphics.hpp>
 using namespace std;
 
-int maim()
+int main()
 {
 }
