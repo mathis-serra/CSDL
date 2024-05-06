@@ -13,12 +13,12 @@ int main() {
     simulation.SetCellValue(3, 4, 1);
 
     bool drawGrid = false; // Définir la variable drawGrid
-    
+ 
 
     while (!WindowShouldClose()) {
         if (IsKeyPressed(KEY_ENTER)) { 
             drawGrid = true; 
-            continue; 
+            
         }
 
         simulation.Update();
@@ -34,7 +34,7 @@ int main() {
         if (drawGrid) { 
             simulation.Draw();
         }
-        simulation.Draw();
+        
         EndDrawing();
     }
 
