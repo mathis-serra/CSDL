@@ -1,49 +1,45 @@
 #include "raylib.h"
 #include <vector> 
+#include"simulation.hpp"
 
-bool drawGrid = false;
-std::vector<Vector2> cellPositions; // Vector to store cell positions
 
-void draw_grid(int screenWidth, int screenHeight, int size, Color color);
-void add_cell(int x, int y, int size, Color color);
 
 int main() {
-    const int screenWidth = 1100;
-    const int screenHeight = 700;
-    const int cellSize = 16; // Size of each cell
-    const int numCells = 5; // Number of cells to add
+    const int screenWidth = 750;
+    const int screenHeight = 750;
+    const int cellSize = 25; // Size of each cell
+    // const int numCells = 5; // Number of cells to add
     InitWindow(screenWidth, screenHeight, "Game of Life");
-
     SetTargetFPS(60); 
+    Simulation Simulation(screenHeight, screenWidth, cellSize);
+    Simulation.SetCellValue(3, 4, 1);
 
-    for (int i = 0; i < numCells; ++i) {
-        // Generate random positions multiples of cell size
-        int randX = GetRandomValue(0, (screenWidth / cellSize) - 1) * cellSize; 
-        int randY = GetRandomValue(0, (screenHeight / cellSize) - 1) * cellSize; 
-        cellPositions.push_back({(float)randX, (float)randY});
-    }
+
+    
+    
 
     while (!WindowShouldClose()) {
         if (IsKeyPressed(KEY_ENTER)) { 
-            drawGrid = true; 
+            // drawGrid = true; 
+            continue; 
         }
 
         BeginDrawing();
 
         ClearBackground(BLACK);
 
-        if (!drawGrid) {
-            DrawText("Welcome to Game of Life", (screenWidth - MeasureText("Welcome to Game of Life", 50)) / 2, screenHeight / 2 - 80, 50, WHITE);
-            DrawText("Press ENTER to play", (screenWidth - MeasureText("Press ENTER to play", 35)) / 2, screenHeight / 2 + 50, 35, WHITE);
-        }
+        // if (!drawGrid) {
+        //     DrawText("Welcome to Game of Life", (screenWidth - MeasureText("Welcome to Game of Life", 50)) / 2, screenHeight / 2 - 80, 50, WHITE);
+        //     DrawText("Press ENTER to play", (screenWidth - MeasureText("Press ENTER to play", 35)) / 2, screenHeight / 2 + 50, 35, WHITE);
+        // }
 
-        if (drawGrid) { 
-            draw_grid(screenWidth, screenHeight, cellSize, GRAY);
-            for (const auto& pos : cellPositions) {
-                add_cell((int)pos.x, (int)pos.y, cellSize, RED);
-            }
-        }
-
+        // if (drawGrid) { 
+        //     draw_grid(screenWidth, screenHeight, cellSize, GRAY);
+        //     for (const auto& pos : cellPositions) {
+        //         add_cell((int)pos.x, (int)pos.y, cellSize, RED);
+        //     }
+        // }
+        Simulation.Draw();
         EndDrawing();
     }
 
