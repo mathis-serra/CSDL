@@ -78,6 +78,55 @@ void FillRandom(std::vector<std::vector<int>>& cells) {
     }
 }
 
+void FirstPatern(std::vector<std::vector<int>>& cells){
+    for (int row = 0; row < cells.size(); row++) {
+        for (int column = 0; column < cells[row].size(); column++) {
+            cells[row][column] = 0;
+        }
+    }
+    cells[1][5] = 1;
+    cells[2][5] = 1;
+    cells[3][5] = 1;
+    cells[4][5] = 1;
+    cells[5][5] = 1;
+    cells[6][5] = 1;
+    cells[7][5] = 1;
+    cells[8][5] = 1;
+    cells[9][5] = 1;
+    cells[10][5] = 1;
+    cells[11][5] = 1;
+    cells[12][5] = 1;
+    cells[13][5] = 1;
+    cells[14][5] = 1;
+    cells[15][5] = 1;
+    cells[16][5] = 1;
+    cells[17][5] = 1;
+    cells[18][5] = 1;
+    cells[19][5] = 1;
+    cells[20][5] = 1;
+    cells[21][5] = 1;
+    cells[22][5] = 1;
+    cells[23][5] = 1;
+    cells[24][5] = 1;
+    cells[25][5] = 1;
+    cells[26][5] = 1;
+    cells[27][5] = 1;
+    cells[28][5] = 1;
+    cells[29][5] = 1;
+    cells[30][5] = 1;
+    cells[31][5] = 1;
+    cells[32][5] = 1;
+    cells[33][5] = 1;
+    cells[34][5] = 1;
+    cells[35][5] = 1;
+    cells[36][5] = 1;
+    cells[37][5] = 1;
+    cells[38][5] = 1;
+    cells[39][5] = 1;
+    cells[40][5] = 1;
+    cells[41][5] = 1;
+}
+
 // Function to save the current population to a text file
 void SavePopulation(const std::vector<std::vector<int>>& cells, const char* filename) {
     FILE* file = fopen(filename, "w");
@@ -98,7 +147,7 @@ void SavePopulation(const std::vector<std::vector<int>>& cells, const char* file
 int main() {
     const int screenWidth = 750;
     const int screenHeight = 750;
-    const int cellSize = 25;  
+    const int cellSize = 10;  
 
     InitWindow(screenWidth, screenHeight, "Game of Life");
     SetTargetFPS(12); 
@@ -112,7 +161,13 @@ int main() {
 
     while (!WindowShouldClose()) {
         if (IsKeyPressed(KEY_ENTER)) { 
+            FillRandom(cells);
             drawGrid = true; 
+        }
+
+        if (IsKeyPressed(KEY_F)) { 
+            drawGrid = true;
+            FirstPatern(cells);
         }
 
         if (IsKeyPressed(KEY_S)) { // Press "S" key to save the population
@@ -128,6 +183,7 @@ int main() {
             DrawText("Welcome to Game of Life", (screenWidth - MeasureText("Welcome to Game of Life", 50)) / 2, screenHeight / 2 - 80, 50, WHITE);
             DrawText("Press ENTER to play", (screenWidth - MeasureText("Press ENTER to play", 35)) / 2, screenHeight / 2 + 40, 35, WHITE);
             DrawText("Press S to save population", (screenWidth - MeasureText("Press ENTER to play", 40)) / 2, screenHeight / 2 + 220, 30, WHITE);
+            DrawText("Press F to first patern", (screenWidth - MeasureText("Press ENTER to play", 40)) / 2, screenHeight / 2 + 300, 30, WHITE);
         }
 
         if (drawGrid) { 
