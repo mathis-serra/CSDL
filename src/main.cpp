@@ -89,6 +89,9 @@ void SavePopulation(const std::vector<std::vector<int>>& cells, const char* file
             fprintf(file, "\n");
         }
         fclose(file);
+        std::cout << "La Population à bien été sauvegarder!" << std::endl;
+    } else {
+        std::cerr << "Erreur dans le fichier de sauvegarde" << filename << std::endl;
     }
 }
 
