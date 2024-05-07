@@ -126,7 +126,8 @@ int main() {
 
         if (!drawGrid) {
             DrawText("Welcome to Game of Life", (screenWidth - MeasureText("Welcome to Game of Life", 50)) / 2, screenHeight / 2 - 80, 50, WHITE);
-            DrawText("Press ENTER to play", (screenWidth - MeasureText("Press ENTER to play", 35)) / 2, screenHeight / 2 + 50, 35, WHITE);
+            DrawText("Press ENTER to play", (screenWidth - MeasureText("Press ENTER to play", 35)) / 2, screenHeight / 2 + 40, 35, WHITE);
+            DrawText("Press S to save population", (screenWidth - MeasureText("Press ENTER to play", 40)) / 2, screenHeight / 2 + 220, 30, WHITE);
         }
 
         if (drawGrid) { 
