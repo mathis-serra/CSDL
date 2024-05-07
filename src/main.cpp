@@ -3,8 +3,8 @@
 #include <utility>
 
 void DrawGrid(const std::vector<std::vector<int>>& cells, int cellSize) {
-    for (size_t row = 0; row < cells.size(); row++) {
-        for (size_t column = 0; column < cells[row].size(); column++) {
+    for (int row = 0; row < cells.size(); row++) {
+        for (int column = 0; column < cells[row].size(); column++) {
             Color color = cells[row][column] ? Color{0, 0, 0, 255} : Color{255, 255, 255, 255};
             DrawRectangle(column * cellSize, row * cellSize, cellSize - 1, cellSize - 1, color);
         }
@@ -34,8 +34,8 @@ int CountLiveNeighbors(const std::vector<std::vector<int>>& cells, int row, int 
 }
 
 void Update(std::vector<std::vector<int>>& cells, std::vector<std::vector<int>>& tempCells) {
-    for (size_t row = 0; row < cells.size(); row++) {
-        for (size_t column = 0; column < cells[row].size(); column++) {
+    for (int row = 0; row < cells.size(); row++) {
+        for (int column = 0; column < cells[row].size(); column++) {
             int liveNeighbors = CountLiveNeighbors(cells, row, column);
             int cellValue = cells[row][column];
 
@@ -56,16 +56,16 @@ void Update(std::vector<std::vector<int>>& cells, std::vector<std::vector<int>>&
     }
 
     // Mettre à jour la grille actuelle avec les nouveaux états de la grille temporaire
-    for (size_t row = 0; row < cells.size(); row++) {
-        for (size_t column = 0; column < cells[row].size(); column++) {
+    for (int row = 0; row < cells.size(); row++) {
+        for (int column = 0; column < cells[row].size(); column++) {
             cells[row][column] = tempCells[row][column];
         }
     }
 }
 
 void FillRandom(std::vector<std::vector<int>>& cells) {
-    for (size_t row = 0; row < cells.size(); row++) {
-        for (size_t column = 0; column < cells[row].size(); column++) {
+    for (int row = 0; row < cells.size(); row++) {
+        for (int column = 0; column < cells[row].size(); column++) {
             int randomValue = GetRandomValue(0, 4);
             cells[row][column] = (randomValue == 4) ? 1 : 0;
         }
