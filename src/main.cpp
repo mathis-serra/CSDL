@@ -1,7 +1,9 @@
 #include "raylib.h"
 #include <vector>
 #include <utility>
+#include <iostream> 
 
+// Function to draw the grid based on the state of cells
 void DrawGrid(const std::vector<std::vector<int>>& cells, int cellSize) {
     for (int row = 0; row < cells.size(); row++) {
         for (int column = 0; column < cells[row].size(); column++) {
@@ -11,12 +13,14 @@ void DrawGrid(const std::vector<std::vector<int>>& cells, int cellSize) {
     }
 }
 
+// Function to set the value of a cell in the grid
 void SetCellValue(std::vector<std::vector<int>>& cells, int row, int column, int value) {
     if (row >= 0 && row < cells.size() && column >= 0 && column < cells[0].size()) {
         cells[row][column] = value;
     }
 }
 
+// Function to count the number of live neighbors around a cell
 int CountLiveNeighbors(const std::vector<std::vector<int>>& cells, int row, int column) {
     int liveNeighbors = 0;
     std::vector<std::pair<int, int>> neighborOffsets = {
@@ -33,6 +37,7 @@ int CountLiveNeighbors(const std::vector<std::vector<int>>& cells, int row, int 
     return liveNeighbors;
 }
 
+// Function to update the state of the cells based on the Game of Life rules
 void Update(std::vector<std::vector<int>>& cells, std::vector<std::vector<int>>& tempCells) {
     for (int row = 0; row < cells.size(); row++) {
         for (int column = 0; column < cells[row].size(); column++) {
@@ -55,7 +60,7 @@ void Update(std::vector<std::vector<int>>& cells, std::vector<std::vector<int>>&
         }
     }
 
-    // Mettre à jour la grille actuelle avec les nouveaux états de la grille temporaire
+    // Update the current grid with the new states from the temporary grid
     for (int row = 0; row < cells.size(); row++) {
         for (int column = 0; column < cells[row].size(); column++) {
             cells[row][column] = tempCells[row][column];
@@ -63,12 +68,27 @@ void Update(std::vector<std::vector<int>>& cells, std::vector<std::vector<int>>&
     }
 }
 
+// Function to randomly populate the grid with live and dead cells
 void FillRandom(std::vector<std::vector<int>>& cells) {
     for (int row = 0; row < cells.size(); row++) {
         for (int column = 0; column < cells[row].size(); column++) {
             int randomValue = GetRandomValue(0, 4);
             cells[row][column] = (randomValue == 4) ? 1 : 0;
         }
+    }
+}
+
+// Function to save the current population to a text file
+void SavePopulation(const std::vector<std::vector<int>>& cells, const char* filename) {
+    FILE* file = fopen(filename, "w");
+    if (file != NULL) {
+        for (int row = 0; row < cells.size(); row++) {
+            for (int column = 0; column < cells[row].size(); column++) {
+                fprintf(file, "%d ", cells[row][column]);
+            }
+            fprintf(file, "\n");
+        }
+        fclose(file);
     }
 }
 
@@ -90,6 +110,10 @@ int main() {
     while (!WindowShouldClose()) {
         if (IsKeyPressed(KEY_ENTER)) { 
             drawGrid = true; 
+        }
+
+        if (IsKeyPressed(KEY_S)) { // Press "S" key to save the population
+            SavePopulation(cells, "population.txt");
         }
 
         Update(cells, tempCells);
