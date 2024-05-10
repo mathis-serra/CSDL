@@ -127,6 +127,21 @@ void FirstPatern(std::vector<std::vector<int>>& cells){
     cells[41][5] = 1;
 }
 
+
+void LoadPopulation(std::vector<std::vector<int>>& cells, const char* filename) {
+    FILE* file = fopen(filename, "r");
+    if (file != NULL) {
+        for (int row = 0; row < cells.size(); row++) {
+            for (int column = 0; column < cells[row].size(); column++) {
+                fscanf(file, "%d", &cells[row][column]);
+            }
+        }
+        fclose(file);
+    } else {
+        std::cerr << "Erreur dans le fichier de sauvegarde" << filename << std::endl;
+    }
+}
+
 // Function to save the current population to a text file
 void SavePopulation(const std::vector<std::vector<int>>& cells, const char* filename) {
     FILE* file = fopen(filename, "w");
@@ -145,8 +160,8 @@ void SavePopulation(const std::vector<std::vector<int>>& cells, const char* file
 }
 
 int main() {
-    const int screenWidth = 750;
-    const int screenHeight = 750;
+    const int screenWidth = 1000;
+    const int screenHeight = 780;
     const int cellSize = 10;  
 
     InitWindow(screenWidth, screenHeight, "Game of Life");
@@ -170,8 +185,13 @@ int main() {
             FirstPatern(cells);
         }
 
-        if (IsKeyPressed(KEY_S)) { // Press "S" key to save the population
+        if (IsKeyPressed(KEY_S)) { 
             SavePopulation(cells, "population.txt");
+        }
+
+        if (IsKeyPressed(KEY_G)) { 
+            LoadPopulation(cells, "population.txt");
+            drawGrid = true;
         }
 
         Update(cells, tempCells);
@@ -180,10 +200,11 @@ int main() {
         ClearBackground(BLACK);
 
         if (!drawGrid) {
-            DrawText("Welcome to Game of Life", (screenWidth - MeasureText("Welcome to Game of Life", 50)) / 2, screenHeight / 2 - 80, 50, WHITE);
-            DrawText("Press ENTER to play", (screenWidth - MeasureText("Press ENTER to play", 35)) / 2, screenHeight / 2 + 40, 35, WHITE);
-            DrawText("Press S to save population", (screenWidth - MeasureText("Press ENTER to play", 40)) / 2, screenHeight / 2 + 220, 30, WHITE);
-            DrawText("Press F to first patern", (screenWidth - MeasureText("Press ENTER to play", 40)) / 2, screenHeight / 2 + 300, 30, WHITE);
+            DrawText("Welcome to Game of Life", (screenWidth - MeasureText("Welcome to Game of Life", 50)) / 2, screenHeight / 2 -300, 50, WHITE);
+            DrawText("Press ENTER to play", (screenWidth - MeasureText("Press ENTER to play", 35)) / 2, screenHeight / 2 - 180, 35, WHITE);
+            DrawText("Press S to save population", (screenWidth - MeasureText("Press ENTER to play", 40)) / 2, screenHeight / 2 + 40, 30, WHITE);
+            DrawText("Press F to first patern", (screenWidth - MeasureText("Press ENTER to play", 40)) / 2, screenHeight / 2 + 120, 30, WHITE);
+            DrawText("Press G to load population", (screenWidth - MeasureText("Press ENTER to play", 40)) / 2, screenHeight / 2 + 200, 30, WHITE);
         }
 
         if (drawGrid) { 
