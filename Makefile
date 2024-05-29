@@ -12,7 +12,8 @@ VUE_DIR := $(SRC_DIR)/vue
 SRC_FILES := main.cpp \
              $(VUE_DIR)/Grid.cpp \
              $(LOGIC_DIR)/Tower.cpp \
-             $(LOGIC_DIR)/Enemy.cpp
+             $(LOGIC_DIR)/Enemy.cpp \
+			 $(VUE_DIR)/Tile.cpp \
 
 # Object files
 OBJ_FILES := $(SRC_FILES:.cpp=.o)

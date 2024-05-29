@@ -14,4 +14,4 @@ private:
     int size;
 };
 
-#endif
+#endif // TOWER_H
